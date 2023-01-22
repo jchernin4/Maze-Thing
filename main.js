@@ -1,7 +1,7 @@
 const mazeArr = [
     0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 1, 0, 0, 0, 0, 0, 0,
-    1, 2, 1, 0, 0, 0, 0, 0, 0,
+    1, 0, 1, 0, 0, 2, 0, 0, 0,
     1, 0, 1, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 1, 1, 1, 1, 1, 0,
@@ -25,6 +25,12 @@ move("left");
 move("right");
 
 function getPlayerLoc() {
+    console.log("-----------------------------");
+    let temp = getCoordsFromIndex(mazeArr.indexOf(2));
+    console.log(mazeArr.indexOf(2));
+    console.log(temp);
+    console.log(getIndexFromCoords(temp[0], temp[1]));
+    console.log("-----------------------------");
     return getCoordsFromIndex(mazeArr.indexOf(2));
 }
 function getGoalLoc() {
@@ -51,6 +57,8 @@ function move(direction) {
         }
     } else if (direction == "right") {
         changeToIndex = getIndexFromCoords(curPlayerLoc[0] + 1, curPlayerLoc[1]);
+        console.log(getIndexFromCoords(curPlayerLoc[0] + 1, curPlayerLoc[1]))
+        //console.log(mazeArr[changeToIndex])
         if (curPlayerLoc[0] < columnsY - 1 && mazeArr[changeToIndex] != -1 && mazeArr[changeToIndex] != 1) {
             console.log("OK right");
         }
@@ -62,11 +70,16 @@ function move(direction) {
 function getIndexFromCoords(x, y) {
     let index = columnsY / y;
     index = index + x;
+    console.log("x = " + x + " y = " + y + " index = " + index);
     return index;
 }
 
 function getCoordsFromIndex(index) {
     let x = Math.floor(index % columnsY);
     let y = Math.floor(index / columnsY);
+
+    //console.log("Index % columnsY = " + x);
+    //console.log("Index / columnsY = " + y);
+
     return [x, y];
 }
